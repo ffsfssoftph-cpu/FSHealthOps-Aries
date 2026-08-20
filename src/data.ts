@@ -104,12 +104,12 @@ export const machineFingerprint = () =>
 
 /* ---------------- RBAC ---------------- */
 export const ROLE_META: Record<Role, { label: string; short: string; desc: string; color: string }> = {
-  super:     { label: "Super User", short: "SU", desc: "Full platform authority — licensing, deployment, all modules", color: "#0d2a24" },
-  admin:     { label: "Administrator", short: "AD", desc: "Organization-wide administration and configuration", color: "#204c40" },
-  frontdesk: { label: "Front Desk / Scheduler", short: "FD", desc: "Intake, booking engine, client self-service portal", color: "#2e7da6" },
-  caregiver: { label: "Caregiver / Care Coordinator", short: "CC", desc: "Care-team roster, visit assignment, delivery workflow", color: "#17876b" },
-  billing:   { label: "Billing Officer", short: "BO", desc: "Invoicing, HMO co-pay handling, claims submission", color: "#c77f1b" },
-  manager:   { label: "Clinic / Branch Manager", short: "BM", desc: "Branch performance, reporting, resource management", color: "#7a4fbf" },
+  super:     { label: "Super User", short: "SU", desc: "Full platform authority — licensing, deployment, all modules", color: "#12171e" },
+  admin:     { label: "Administrator", short: "AD", desc: "Organization-wide administration and configuration", color: "#46505c" },
+  frontdesk: { label: "Front Desk / Scheduler", short: "FD", desc: "Intake, booking engine, client self-service portal", color: "#2576eb" },
+  caregiver: { label: "Caregiver / Care Coordinator", short: "CC", desc: "Care-team roster, visit assignment, delivery workflow", color: "#12a5a0" },
+  billing:   { label: "Billing Officer", short: "BO", desc: "Invoicing, HMO co-pay handling, claims submission", color: "#c7821c" },
+  manager:   { label: "Clinic / Branch Manager", short: "BM", desc: "Branch performance, reporting, resource management", color: "#3f83e0" },
 };
 export const ALL_ROLES = Object.keys(ROLE_META) as Role[];
 export const ACCESS: Record<PageKey, Role[]> = {
@@ -169,12 +169,12 @@ export const seedClients = (): ClientRec[] => [
 ];
 
 export const seedProviders = (): Provider[] => [
-  { id: "p1", name: "Nadia Reyes, RN", title: "Lead Nurse — Home Health", creds: "RN, CNA-Cert", color: "#17876b", team: "Team Alpha", capacity: 8, status: "on-duty", certs: [{ name: "RN License", exp: dayOffset(320) }, { name: "BLS", exp: dayOffset(24) }, { name: "Wound Care Cert", exp: dayOffset(140) }], visitsWeek: 6 },
-  { id: "p2", name: "Tom Okafor, PT", title: "Physical Therapist", creds: "DPT", color: "#2e7da6", team: "Team Bravo", capacity: 10, status: "on-duty", certs: [{ name: "PT License", exp: dayOffset(280) }, { name: "BLS", exp: dayOffset(200) }], visitsWeek: 8 },
-  { id: "p3", name: "Grace Lin, HHA", title: "Home Health Aide", creds: "HHA, CPR", color: "#c77f1b", team: "Team Alpha", capacity: 12, status: "on-duty", certs: [{ name: "HHA Cert", exp: dayOffset(12) }, { name: "CPR / First Aid", exp: dayOffset(96) }], visitsWeek: 11 },
-  { id: "p4", name: "Sam Delgado, LVN", title: "Licensed Vocational Nurse", creds: "LVN", color: "#7a4fbf", team: "Team Bravo", capacity: 9, status: "off-duty", certs: [{ name: "LVN License", exp: dayOffset(410) }, { name: "IV Therapy", exp: dayOffset(60) }], visitsWeek: 4 },
-  { id: "p5", name: "Ivy Tran, Wellness Coach", title: "Wellness & Nutrition Coach", creds: "NBC-HWC", color: "#b9526e", team: "Team Alpha", capacity: 10, status: "on-duty", certs: [{ name: "Health Coach Cert", exp: dayOffset(190) }], visitsWeek: 7 },
-  { id: "p6", name: "Dr. Renee Ashford", title: "Medical Director (Consult)", creds: "MD", color: "#0d2a24", team: "Team Bravo", capacity: 4, status: "on-leave", certs: [{ name: "Medical License", exp: dayOffset(365) }], visitsWeek: 2 },
+  { id: "p1", name: "Nadia Reyes, RN", title: "Lead Nurse — Home Health", creds: "RN, CNA-Cert", color: "#2576eb", team: "Team Alpha", capacity: 8, status: "on-duty", certs: [{ name: "RN License", exp: dayOffset(320) }, { name: "BLS", exp: dayOffset(24) }, { name: "Wound Care Cert", exp: dayOffset(140) }], visitsWeek: 6 },
+  { id: "p2", name: "Tom Okafor, PT", title: "Physical Therapist", creds: "DPT", color: "#5c9cf5", team: "Team Bravo", capacity: 10, status: "on-duty", certs: [{ name: "PT License", exp: dayOffset(280) }, { name: "BLS", exp: dayOffset(200) }], visitsWeek: 8 },
+  { id: "p3", name: "Grace Lin, HHA", title: "Home Health Aide", creds: "HHA, CPR", color: "#e8a33d", team: "Team Alpha", capacity: 12, status: "on-duty", certs: [{ name: "HHA Cert", exp: dayOffset(12) }, { name: "CPR / First Aid", exp: dayOffset(96) }], visitsWeek: 11 },
+  { id: "p4", name: "Sam Delgado, LVN", title: "Licensed Vocational Nurse", creds: "LVN", color: "#12a5a0", team: "Team Bravo", capacity: 9, status: "off-duty", certs: [{ name: "LVN License", exp: dayOffset(410) }, { name: "IV Therapy", exp: dayOffset(60) }], visitsWeek: 4 },
+  { id: "p5", name: "Ivy Tran, Wellness Coach", title: "Wellness & Nutrition Coach", creds: "NBC-HWC", color: "#d96889", team: "Team Alpha", capacity: 10, status: "on-duty", certs: [{ name: "Health Coach Cert", exp: dayOffset(190) }], visitsWeek: 7 },
+  { id: "p6", name: "Dr. Renee Ashford", title: "Medical Director (Consult)", creds: "MD", color: "#1d2530", team: "Team Bravo", capacity: 4, status: "on-leave", certs: [{ name: "Medical License", exp: dayOffset(365) }], visitsWeek: 2 },
 ];
 
 const T = dayOffset(0);

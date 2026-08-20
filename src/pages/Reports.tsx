@@ -63,9 +63,9 @@ export function Reports() {
         <Reveal delay={90}><Card>
           <SectionHead title="Revenue by payer mix" icon="invoice" />
           <Donut parts={[
-            { label: "HMO covered", value: Math.round(hmoPart), color: "#7a4fbf" },
-            { label: "Client co-pay", value: Math.round(copay), color: "#e39a2e" },
-            { label: "Self-pay", value: Math.max(60, Math.round(revenue - hmoPart - copay)), color: "#17876b" },
+            { label: "HMO covered", value: Math.round(hmoPart), color: "#2576eb" },
+            { label: "Client co-pay", value: Math.round(copay), color: "#e8a33d" },
+            { label: "Self-pay", value: Math.max(60, Math.round(revenue - hmoPart - copay)), color: "#9aa4af" },
           ]} />
           <p className="mt-3 text-[11px] text-pine-500">SeniorCare 90% · MediPlus 80% · BlueCare 70% coverage schedules applied at invoice time.</p>
         </Card></Reveal>

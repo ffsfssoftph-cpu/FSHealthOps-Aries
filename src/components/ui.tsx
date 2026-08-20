@@ -80,7 +80,7 @@ export function Btn({
 
 export function Chip({ tone = "gray", children, pulse }: { tone?: "green" | "amber" | "red" | "blue" | "gray" | "dark" | "violet"; children: ReactNode; pulse?: boolean }) {
   const tones: Record<string, string> = {
-    green: "bg-pulse-50 text-pulse-700 ring-pulse-200",
+    green: "bg-[#e7f3eb] text-[#217a45] ring-[#bfe0cc]",
     amber: "bg-vita-100 text-vita-600 ring-vita-400/40",
     red: "bg-danger-100 text-danger-600 ring-danger-500/30",
     blue: "bg-info-100 text-info-600 ring-info-500/30",
@@ -148,21 +148,21 @@ export function Vitals({ label, value, prefix = "", suffix = "", spark, tone = "
   tone?: "green" | "amber" | "red" | "blue"; hint?: string; onClick?: () => void;
 }) {
   const v = useCountUp(value);
-  const colors = { green: "#17876b", amber: "#e39a2e", red: "#d64545", blue: "#2e7da6" };
+  const colors = { green: "#2576eb", amber: "#e8a33d", red: "#e14d4d", blue: "#5c9cf5" };
   return (
-    <button onClick={onClick} className={`group relative overflow-hidden rounded-lg border border-pine-200/80 bg-pine-950 p-3.5 text-left shadow-lift transition-all duration-300 hover:-translate-y-1 hover:shadow-pop ${onClick ? "cursor-pointer" : "cursor-default"}`}>
+    <button onClick={onClick} className={`group relative h-full overflow-hidden rounded-lg border border-pine-200/80 bg-white p-4 text-left shadow-lift transition-all duration-300 hover:-translate-y-1 hover:shadow-pop ${onClick ? "cursor-pointer" : "cursor-default"}`}>
       <div className="flex items-center justify-between">
-        <span className="font-mono text-[9.5px] font-semibold uppercase tracking-[0.16em] text-pine-300">{label}</span>
-        <span className={`h-1.5 w-1.5 rounded-full ${tone === "amber" ? "bg-vita-400 dot-warn" : tone === "red" ? "bg-danger-500 dot-warn" : "bg-pulse-400 dot-live"}`} />
+        <span className="font-mono text-[9.5px] font-semibold uppercase tracking-[0.16em] text-pine-500">{label}</span>
+        <span className={`h-1.5 w-1.5 rounded-full ${tone === "amber" ? "bg-vita-400 dot-warn" : tone === "red" ? "bg-danger-500 dot-warn" : "bg-pulse-500 dot-live"}`} />
       </div>
-      <div className="mt-1.5 flex items-end justify-between gap-2">
-        <span className="font-mono text-[26px] font-semibold leading-none tracking-tight text-pine-50 tnum">
+      <div className="mt-2 flex items-end justify-between gap-2">
+        <span className="font-display text-[28px] font-extrabold leading-none tracking-tight text-ink tnum">
           {prefix}{v.toLocaleString()}{suffix}
         </span>
         {spark && <Spark data={spark} color={colors[tone]} />}
       </div>
-      {hint && <p className="mt-1.5 text-[10.5px] text-pine-400">{hint}</p>}
-      <span className="pointer-events-none absolute inset-x-0 bottom-0 h-[3px]" style={{ background: colors[tone] }} />
+      {hint && <p className="mt-2 text-[10.5px] text-pine-500">{hint}</p>}
+      <span className="pointer-events-none absolute inset-x-0 bottom-0 h-[3px] opacity-80" style={{ background: colors[tone] }} />
     </button>
   );
 }
@@ -179,7 +179,7 @@ export function Spark({ data, color, w = 72, h = 26 }: { data: number[]; color: 
 }
 
 /* ---------------- charts ---------------- */
-export function Bars({ data, labels, color = "#17876b", h = 120, fmt }: { data: number[]; labels: string[]; color?: string; h?: number; fmt?: (n: number) => string }) {
+export function Bars({ data, labels, color = "#2576eb", h = 120, fmt }: { data: number[]; labels: string[]; color?: string; h?: number; fmt?: (n: number) => string }) {
   const max = Math.max(...data, 1);
   return (
     <div className="flex items-end gap-2" style={{ height: h }}>
@@ -225,7 +225,7 @@ export function Donut({ parts, size = 132 }: { parts: { label: string; value: nu
   );
 }
 
-export function TrendLine({ data, color = "#17876b", h = 110, labels }: { data: number[]; color?: string; h?: number; labels?: string[] }) {
+export function TrendLine({ data, color = "#2576eb", h = 110, labels }: { data: number[]; color?: string; h?: number; labels?: string[] }) {
   const w = 100;
   const max = Math.max(...data), min = Math.min(...data);
   const norm = (d: number) => 8 + (1 - (d - min) / (max - min || 1)) * (h - 24);
@@ -255,8 +255,8 @@ export function Modal({ open, onClose, title, children, wide, footer }: {
   }, [open, onClose]);
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-pine-950/55 p-4 pt-[7vh] anim-fade-in" onMouseDown={e => e.target === e.currentTarget && onClose()}>
-      <div className={`w-full ${wide ? "max-w-3xl" : "max-w-lg"} anim-pop rounded-lg border border-pine-200 bg-white shadow-pop`}>
+    <div className="frost-backdrop fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-pine-950/40 p-4 pt-[7vh] anim-fade-in" onMouseDown={e => e.target === e.currentTarget && onClose()}>
+      <div className={`w-full ${wide ? "max-w-3xl" : "max-w-lg"} anim-pop rounded-lg border border-pine-200/70 bg-white shadow-pop`}>
         <div className="flex items-center justify-between border-b border-pine-100 px-4 py-3">
           <h3 className="font-display text-[15px] font-extrabold tracking-tight text-pine-900">{title}</h3>
           <button onClick={onClose} className="rounded p-1 text-pine-400 transition-colors hover:bg-pine-100 hover:text-pine-800"><Icon name="x" size={16} /></button>

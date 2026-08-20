@@ -6,14 +6,14 @@ import { useEffect } from "react";
    ============================================================ */
 
 export function Emblem({ size = 28, tone = "color" }: { size?: number; tone?: "color" | "light" | "mono" }) {
-  const bg = tone === "light" ? "#F2F6F4" : tone === "mono" ? "currentColor" : "#0D2A24";
-  const cross = tone === "light" ? "#0D2A24" : "#F2F6F4";
+  const bg = tone === "light" ? "#F2F5F7" : tone === "mono" ? "currentColor" : "#1D2530";
+  const cross = tone === "light" ? "#1D2530" : "#F2F5F7";
   return (
     <svg width={size} height={size} viewBox="0 0 32 32" aria-label="FS CareOps emblem" style={{ flexShrink: 0 }}>
       <rect width="32" height="32" rx="7" fill={tone === "color" ? bg : "transparent"} stroke={tone === "color" ? "none" : bg} strokeWidth={tone === "color" ? 0 : 1.5} />
       {tone === "color" && <path d="M16 7v18M7 16h18" stroke={cross} strokeWidth="4.4" strokeLinecap="round" />}
       {tone !== "color" && <path d="M16 7v18M7 16h18" stroke={bg} strokeWidth="4.4" strokeLinecap="round" fill="none" />}
-      <path d="M4 21h5l2.2-5.4 3 8 2.2-5.4H28" stroke={tone === "color" ? "#3FA284" : bg} strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M4 21h5l2.2-5.4 3 8 2.2-5.4H28" stroke={tone === "color" ? "#2576EB" : bg} strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -84,7 +84,7 @@ export function CompanyMark({ src, name, size = 28 }: { src?: string | null; nam
 }
 
 /* animated electrocardiogram trace */
-export function Ecg({ className = "", color = "#3FA284", speed = 3.4 }: { className?: string; color?: string; speed?: number }) {
+export function Ecg({ className = "", color = "#2576eb", speed = 3.4 }: { className?: string; color?: string; speed?: number }) {
   return (
     <svg viewBox="0 0 640 60" preserveAspectRatio="none" className={className} aria-hidden>
       <path

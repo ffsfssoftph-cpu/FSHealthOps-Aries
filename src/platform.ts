@@ -38,10 +38,10 @@ export const PAGE_MODULE: Record<string, string | null> = {
 };
 
 export const LEVEL_META: Record<Level, { name: string; desc: string; chip: string; dot: string }> = {
-  R: { name: "Responsible", desc: "Can create / edit records in this module", chip: "bg-pulse-100 text-pulse-800 border-pulse-300", dot: "#0f6f58" },
-  A: { name: "Accountable", desc: "Approves / finalizes / posts — maker-checker authority", chip: "bg-vita-100 text-vita-600 border-vita-400", dot: "#c77f1b" },
-  C: { name: "Consulted",   desc: "View + comment / attach notes, no edit rights", chip: "bg-info-100 text-info-700 border-info-500", dot: "#256888" },
-  I: { name: "Informed",    desc: "View-only — read-only dashboards & notifications", chip: "bg-pine-100 text-pine-600 border-pine-300", dot: "#64748b" },
+  R: { name: "Responsible", desc: "Can create / edit records in this module", chip: "bg-pulse-100 text-pulse-800 border-pulse-300", dot: "#1d5fc4" },
+  A: { name: "Accountable", desc: "Approves / finalizes / posts — maker-checker authority", chip: "bg-vita-100 text-vita-600 border-vita-400", dot: "#c7821c" },
+  C: { name: "Consulted",   desc: "View + comment / attach notes, no edit rights", chip: "bg-info-100 text-info-700 border-info-500", dot: "#3f83e0" },
+  I: { name: "Informed",    desc: "View-only — read-only dashboards & notifications", chip: "bg-pine-100 text-pine-600 border-pine-300", dot: "#838b96" },
 };
 export const LEVELS: Level[] = ["R", "A", "C", "I"];
 

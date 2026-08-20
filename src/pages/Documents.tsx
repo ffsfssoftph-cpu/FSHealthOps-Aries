@@ -77,7 +77,7 @@ export function Documents() {
           <div className="space-y-1.5">
             {db.checklist.map(c => (
               <div key={c.id} className="flex items-center gap-2 rounded-md border border-pine-100 bg-paper/70 px-2.5 py-1.5">
-                <input type="checkbox" checked={c.required} onChange={() => setDb(d => ({ ...d, checklist: d.checklist.map(x => x.id === c.id ? { ...x, required: !x.required } : x) }))} className="accent-[#17876b]" />
+                <input type="checkbox" checked={c.required} onChange={() => setDb(d => ({ ...d, checklist: d.checklist.map(x => x.id === c.id ? { ...x, required: !x.required } : x) }))} className="accent-[#2576eb]" />
                 <span className="flex-1 text-[12px] text-pine-800">{c.label}</span>
                 <span className={`font-mono text-[8.5px] font-bold uppercase ${c.required ? "text-danger-500" : "text-pine-400"}`}>{c.required ? "req" : "opt"}</span>
                 <button onClick={() => setDb(d => ({ ...d, checklist: d.checklist.filter(x => x.id !== c.id) }))} className="text-pine-300 hover:text-danger-500"><Icon name="x" size={12} /></button>

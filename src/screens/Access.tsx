@@ -56,7 +56,7 @@ export function Access({
           </div>
         </div>
         <div className="relative h-16">
-          <Ecg className="absolute inset-x-0 bottom-4 h-12 w-full" color="#17876b" speed={2.6} />
+          <Ecg className="absolute inset-x-0 bottom-4 h-12 w-full" color="#2576eb" speed={2.6} />
           <div className="absolute bottom-3 right-6 font-mono text-[9px] uppercase tracking-[0.2em] text-pine-500">© FS Softwares × TophComm Systems</div>
         </div>
       </div>
@@ -73,7 +73,7 @@ export function Access({
         <main className="flex flex-1 items-center justify-center py-10">
           <div className="w-full max-w-md anim-pop">
             <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-pulse-600">{sub}</p>
-            <h2 className="mt-1 font-display text-[28px] font-black tracking-tight text-pine-900">{title}</h2>
+            <h2 className="mt-1 font-display text-[32px] font-extrabold leading-tight tracking-tight text-pine-900">{title}</h2>
             <div className="mt-5 rounded-lg border border-pine-200 bg-white p-5 shadow-pop">{children}</div>
           </div>
         </main>
@@ -145,10 +145,12 @@ export function Access({
           <input type="password" value={pw} onChange={e => setPw(e.target.value)} placeholder="••••••••  (demo: any password)" className={inputCls}
             onKeyDown={e => e.key === "Enter" && pw && setStage("twofa")} />
         </div>
-        <Btn className="w-full" size="lg" disabled={!pw} onClick={() => setStage("twofa")}>
-          <Icon name="lock" size={15} /> Continue to 2FA challenge
-        </Btn>
-        <p className="text-center font-mono text-[10px] uppercase tracking-[0.14em] text-pine-400">TOTP enforced · Ten Embedded Requirements §6</p>
+        <button disabled={!pw} onClick={() => setStage("twofa")}
+          className="group flex w-full items-center justify-center gap-2 py-1.5 text-[15px] font-extrabold tracking-tight text-pulse-600 transition-all hover:text-pulse-700 active:scale-[0.98] disabled:opacity-35">
+          Sign in
+          <span className="transition-transform duration-200 group-hover:translate-x-1.5">▸</span>
+        </button>
+        <p className="text-center font-mono text-[10px] uppercase tracking-[0.14em] text-pine-400">TOTP challenge next · Ten Embedded Requirements §6</p>
       </div>,
       "Operator Sign-in", "RBAC · 6 roles provisioned"
     );
