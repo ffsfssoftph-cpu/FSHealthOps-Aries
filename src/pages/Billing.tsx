@@ -12,7 +12,9 @@ export function calc(inv: Pick<Invoice, "items" | "coveragePct">) {
 }
 
 export function Billing() {
-  const { db, setDb, toast, cfg } = useApp();
+  const { db, setDb, toast, cfg, canMod, user } = useApp();
+  const canEditInv = canMod("billing", "edit");
+  const canApproveInv = canMod("billing", "approve");
   const [filter, setFilter] = useState("all");
   const [buildOpen, setBuildOpen] = useState(false);
   const [detail, setDetail] = useState<Invoice | null>(null);
@@ -80,9 +82,9 @@ export function Billing() {
       </div>
 
       <div className="flex flex-wrap gap-1.5">
-        {["all", "draft", "sent", "claim", "paid", "overdue"].map(f => (
+        {["all", "draft", "pending-approval", "sent", "claim", "paid", "overdue"].map(f => (
           <button key={f} onClick={() => setFilter(f)} className={`rounded-full border px-3 py-1.5 text-[11.5px] font-bold capitalize transition-all ${filter === f ? "border-pine-900 bg-pine-900 text-pine-50" : "border-pine-200 bg-white text-pine-600 hover:border-pine-400"}`}>
-            {f} {f !== "all" && <span className="font-mono opacity-60 tnum">{db.invoices.filter(i => i.status === f).length}</span>}
+            {f === "pending-approval" ? "pending approval" : f} {f !== "all" && <span className="font-mono opacity-60 tnum">{db.invoices.filter(i => i.status === f).length}</span>}
           </button>
         ))}
       </div>
@@ -172,7 +174,23 @@ export function Billing() {
       <Modal open={!!detail} onClose={() => setDetail(null)} wide title={detail ? `${detail.number} — ${client(detail.clientId)?.name}` : ""}
         footer={detail ? <>
           <Btn kind="outline" onClick={() => window.print()}><Icon name="printer" size={14} /> Print letterhead copy</Btn>
-          {detail.status === "draft" && <Btn kind="dark" onClick={() => setStatus(detail.id, "sent", `${detail.number} sent to client & guarantor`)}><Icon name="send" size={14} /> Send</Btn>}
+          {detail.status === "draft" && canEditInv && (
+            <Btn kind="dark" onClick={() => setStatus(detail.id, "pending-approval", `${detail.number} submitted — awaiting an Accountable (A) approver`)}>
+              <Icon name="send" size={14} /> Submit for approval
+            </Btn>
+          )}
+          {detail.status === "pending-approval" && (
+            canApproveInv ? (
+              <>
+                <Btn onClick={() => setStatus(detail.id, "sent", `${detail.number} approved & posted by ${user?.name} — maker-checker complete`)}>
+                  <Icon name="check" size={14} /> Approve & post (A)
+                </Btn>
+                <Btn kind="danger" onClick={() => setStatus(detail.id, "draft", `${detail.number} rejected back to draft by ${user?.name}`)}>
+                  <Icon name="x" size={14} /> Reject
+                </Btn>
+              </>
+            ) : <span className="rounded-md bg-vita-100 px-2.5 py-1.5 font-mono text-[10px] font-bold uppercase tracking-wider text-vita-600">awaiting Accountable approver</span>
+          )}
           {detail.status === "sent" && <Btn onClick={() => setStatus(detail.id, "paid", `${detail.number} payment recorded — receipt issued`)}><Icon name="check" size={14} /> Record payment</Btn>}
           {(detail.status === "draft" || detail.status === "sent") && detail.hmo && (
             <Btn kind="amber" onClick={() => setStatus(detail.id, "claim", `${detail.number} claim submitted to ${detail.hmo}`)}><Icon name="shield" size={14} /> Submit HMO claim</Btn>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { dayOffset, fmtMoney, uid } from "../data";
 import type { ClientRec } from "../data";
 import { useApp } from "../state";
+import { EntityAvatar, MediaUpload } from "../components/MediaUpload";
 import { Btn, Card, Chip, Drawer, Icon, KV, Modal, Progress, STATUS_TONE, SectionHead, Field, inputCls, Empty } from "../components/ui";
 
 export function Clients() {
@@ -70,8 +71,13 @@ export function Clients() {
                   className="cursor-pointer border-b border-pine-100 transition-colors last:border-0 hover:bg-pulse-50/50 anim-fade-up" style={{ animationDelay: `${i * 35}ms` }}>
                   <td className="px-4 py-2.5">
                     <div className="flex items-center gap-2.5">
-                      <span className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full font-display text-[11px] font-bold text-white ${c.risk === "high" ? "bg-danger-500" : c.risk === "medium" ? "bg-vita-500" : "bg-pine-500"}`}>
-                        {c.name.split(" ").map(w => w[0]).join("")}
+                      <span className="relative inline-block shrink-0">
+                        {db.attachments.some(a => a.entity_type === "customer" && a.entity_id === c.id)
+                          ? <EntityAvatar entityType="customer" entityId={c.id} size={32} name={c.name} />
+                          : <span className={`inline-flex h-8 w-8 items-center justify-center rounded-full font-display text-[11px] font-bold text-white ${c.risk === "high" ? "bg-danger-500" : c.risk === "medium" ? "bg-vita-500" : "bg-pine-500"}`}>
+                              {c.name.split(" ").map(w => w[0]).join("")}
+                            </span>}
+                        <span className="absolute -bottom-1 -right-1"><MediaUpload entityType="customer" entityId={c.id} size={14} crop /></span>
                       </span>
                       <div>
                         <p className="font-bold text-pine-900">{c.name}</p>
@@ -126,6 +132,13 @@ export function Clients() {
       {/* add modal */}
       <Modal open={addOpen} onClose={() => setAddOpen(false)} title="New client intake" wide
         footer={<><Btn kind="ghost" onClick={() => setAddOpen(false)}>Cancel</Btn><Btn onClick={add}><Icon name="check" size={14} /> Create record</Btn></>}>
+        <div className="mb-3 flex items-center gap-3 rounded-md border border-dashed border-pine-300 bg-paper/60 px-3 py-2">
+          <MediaUpload entityType="customer" entityId="intake-preview" size={40} crop />
+          <p className="text-[11px] leading-snug text-pine-500">
+            <b className="text-pine-700">Client photo — optional.</b> Attach now or any time from the registry.
+            Stored via the universal media service with automatic thumbnails.
+          </p>
+        </div>
         <div className="grid gap-3 sm:grid-cols-2">
           <Field label="Full name"><input className={inputCls} value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder="e.g. Rosa Dela Cruz" /></Field>
           <Field label="Date of birth"><input type="date" className={inputCls} value={form.dob} onChange={e => setForm({ ...form, dob: e.target.value })} /></Field>

@@ -3,10 +3,13 @@
    © FS Softwares in collaboration with TophComm Systems
    ============================================================ */
 
+import type { Attachment } from "./platform";
+
 export type Role = "super" | "admin" | "frontdesk" | "caregiver" | "billing" | "manager";
 export type PageKey =
   | "dashboard" | "schedule" | "staff" | "clients" | "services"
-  | "portal" | "billing" | "reports" | "documents" | "integrations" | "system";
+  | "portal" | "billing" | "reports" | "documents" | "integrations" | "system"
+  | "users" | "setup" | "hr" | "pricing";
 
 export interface ClientRec {
   id: string; name: string; dob: string; plan: string; hmo: string | null;
@@ -33,7 +36,7 @@ export interface InvoiceItem { desc: string; qty: number; rate: number }
 export interface Invoice {
   id: string; number: string; clientId: string; date: string; due: string;
   items: InvoiceItem[]; hmo: string | null; coveragePct: number;
-  status: "draft" | "sent" | "paid" | "overdue" | "claim";
+  status: "draft" | "pending-approval" | "sent" | "paid" | "overdue" | "claim";
 }
 export interface DocRec {
   id: string; name: string; kind: string; holder: string; updated: string;
@@ -62,6 +65,7 @@ export interface DB {
   clients: ClientRec[]; providers: Provider[]; visits: Visit[]; services: ServiceItem[];
   packages: ServicePackage[]; invoices: Invoice[]; docs: DocRec[]; checklist: ChecklistItem[];
   integrations: IntegrationRec[]; sync: SyncLine[]; inquiries: Inquiry[]; notifs: Notif[];
+  attachments: Attachment[];
 }
 
 /* ---------------- helpers ---------------- */
@@ -120,12 +124,17 @@ export const ACCESS: Record<PageKey, Role[]> = {
   documents:    ALL_ROLES,
   integrations: ["super", "admin", "manager"],
   system:       ["super", "admin"],
+  users:        ["super", "admin"],
+  setup:        ["super", "admin"],
+  hr:           ["super", "admin", "caregiver", "manager"],
+  pricing:      ["super"],
 };
-export const NAV_GROUPS: { group: string; items: { key: PageKey; label: string; icon: string }[] }[] = [
+export const NAV_GROUPS: { group: string; items: { key: PageKey; label: string; icon: string; gate?: "hr" | "root" }[] }[] = [
   { group: "Operations", items: [
     { key: "dashboard", label: "Ops Console", icon: "pulse" },
     { key: "schedule", label: "Scheduling", icon: "calendar" },
     { key: "staff", label: "Care Teams", icon: "users" },
+    { key: "hr", label: "HR & Payroll", icon: "clock", gate: "hr" },
   ]},
   { group: "Growth", items: [
     { key: "clients", label: "Clients", icon: "heart" },
@@ -139,7 +148,10 @@ export const NAV_GROUPS: { group: string; items: { key: PageKey; label: string; 
   { group: "Governance", items: [
     { key: "documents", label: "Compliance", icon: "shield" },
     { key: "integrations", label: "Integrations", icon: "plug" },
-    { key: "system", label: "System & License", icon: "cpu" },
+    { key: "users", label: "Users & Roles", icon: "users" },
+    { key: "setup", label: "Company Setup", icon: "cpu" },
+    { key: "system", label: "System & License", icon: "server" },
+    { key: "pricing", label: "Pricing Console", icon: "tag", gate: "root" },
   ]},
 ];
 
@@ -205,7 +217,7 @@ export const seedPackages = (): ServicePackage[] => [
 
 export const seedInvoices = (): Invoice[] => [
   { id: "i1", number: "INV-2601", clientId: "c1", date: dayOffset(-8), due: dayOffset(6), items: [{ desc: "Skilled Nursing Visit ×3", qty: 3, rate: 145 }, { desc: "Medication Management", qty: 1, rate: 85 }], hmo: "SeniorCare HMO", coveragePct: 90, status: "claim" },
-  { id: "i2", number: "INV-2602", clientId: "c2", date: dayOffset(-6), due: dayOffset(8), items: [{ desc: "Physical Therapy Session ×2", qty: 2, rate: 110 }], hmo: "BlueCare HMO", coveragePct: 70, status: "sent" },
+  { id: "i2", number: "INV-2602", clientId: "c2", date: dayOffset(-6), due: dayOffset(8), items: [{ desc: "Physical Therapy Session ×2", qty: 2, rate: 110 }], hmo: "BlueCare HMO", coveragePct: 70, status: "pending-approval" },
   { id: "i3", number: "INV-2603", clientId: "c3", date: dayOffset(-4), due: dayOffset(10), items: [{ desc: "Wellness Assessment", qty: 1, rate: 95 }, { desc: "Remote Vital Monitoring", qty: 2, rate: 40 }], hmo: null, coveragePct: 0, status: "paid" },
   { id: "i4", number: "INV-2604", clientId: "c4", date: dayOffset(-14), due: dayOffset(-2), items: [{ desc: "Post-Op Wound Care ×4", qty: 4, rate: 120 }, { desc: "Skilled Nursing Visit", qty: 1, rate: 145 }], hmo: "MediPlus HMO", coveragePct: 80, status: "overdue" },
   { id: "i5", number: "INV-2605", clientId: "c6", date: dayOffset(-3), due: dayOffset(11), items: [{ desc: "Medication Management ×2", qty: 2, rate: 85 }], hmo: "SeniorCare HMO", coveragePct: 90, status: "paid" },

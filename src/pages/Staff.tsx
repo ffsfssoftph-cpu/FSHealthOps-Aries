@@ -2,6 +2,7 @@ import { useState } from "react";
 import { dayOffset, uid } from "../data";
 import type { Provider } from "../data";
 import { useApp } from "../state";
+import { EntityAvatar, MediaUpload } from "../components/MediaUpload";
 import { Btn, Card, Chip, Icon, Modal, STATUS_TONE, SectionHead, Field, inputCls } from "../components/ui";
 
 const PALETTE = ["#17876b", "#2e7da6", "#c77f1b", "#7a4fbf", "#b9526e", "#0d2a24"];
@@ -60,8 +61,13 @@ export function Staff() {
             <div className="p-4">
               <div className="flex items-start justify-between gap-2" style={{ animationDelay: `${i * 50}ms` }}>
                 <div className="flex items-center gap-3">
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg font-display text-[15px] font-black text-white shadow-lift" style={{ background: p.color }}>
-                    {p.name.split(" ").map(w => w[0]).slice(0, 2).join("")}
+                  <span className="relative inline-block shrink-0">
+                    {db.attachments.some(a => a.entity_type === "employee" && a.entity_id === p.id)
+                      ? <EntityAvatar entityType="employee" entityId={p.id} size={44} name={p.name} />
+                      : <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg font-display text-[15px] font-black text-white shadow-lift" style={{ background: p.color }}>
+                          {p.name.split(" ").map(w => w[0]).slice(0, 2).join("")}
+                        </span>}
+                    <span className="absolute -bottom-1 -right-1"><MediaUpload entityType="employee" entityId={p.id} size={16} crop /></span>
                   </span>
                   <div>
                     <p className="font-display text-[14.5px] font-extrabold leading-tight text-pine-900">{p.name}</p>

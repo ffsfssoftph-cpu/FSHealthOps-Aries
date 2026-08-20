@@ -43,6 +43,8 @@ const PATHS: Record<string, ReactNode> = {
   logout: <><path d="M14 4H6v16h8" /><path d="M10 12h11M17.5 8.5L21 12l-3.5 3.5" /></>,
   external: <><path d="M14 4h6v6" /><path d="M20 4l-9 9" /><path d="M19 14v6H5V6h6" /></>,
   sparkle: <path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3zM19 16l.9 2.1L22 19l-2.1.9L19 22l-.9-2.1L16 19l2.1-.9L19 16z" />,
+  sun: <><circle cx="12" cy="12" r="4" /><path d="M12 2.5V5M12 19v2.5M2.5 12H5M19 12h2.5M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8" /></>,
+  moon: <path d="M20 13.5A8.5 8.5 0 0110.5 4 7.5 7.5 0 1020 13.5z" />,
 };
 export function Icon({ name, size = 17, className = "", sw = 1.7 }: { name: string; size?: number; className?: string; sw?: number }) {
   return (
@@ -96,10 +98,12 @@ export function Chip({ tone = "gray", children, pulse }: { tone?: "green" | "amb
 
 export const STATUS_TONE: Record<string, "green" | "amber" | "red" | "blue" | "gray" | "dark" | "violet"> = {
   scheduled: "blue", "en-route": "amber", "in-progress": "green", completed: "dark", missed: "red",
-  draft: "gray", sent: "blue", paid: "green", overdue: "red", claim: "violet",
+  draft: "gray", "pending-approval": "amber", sent: "blue", paid: "green", overdue: "red", claim: "violet",
+  pending: "amber", approved: "green", rejected: "red", posted: "violet", onboarding2: "blue",
+  applied: "gray", interview: "blue", offer: "amber", hired: "green",
+  "on-duty": "green", "off-duty": "gray", "on-leave": "amber", open: "blue", signed: "green",
   valid: "green", expiring: "amber", expired: "red", missing: "red",
-  active: "green", onboarding: "blue", paused: "gray",
-  "on-duty": "green", "off-duty": "gray", "on-leave": "amber",
+  active: "green", onboarding: "blue", paused: "gray", terminated: "gray",
   new: "blue", contacted: "amber", booked: "green",
   connected: "green", disabled: "gray",
 };

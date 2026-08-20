@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* ============================================================
+   FS CareOps design tokens — Phase 4 Theme System
+   Cool-toned pine/teal/graphite base. ONE sharp accent (pulse)
+   reserved for primary actions & alerts. Dark + light modes are
+   variable-driven: OS preference default, per-user toggle.
+   ============================================================ */
 @theme {
   --font-display: "Archivo", "IBM Plex Sans", sans-serif;
   --font-body: "IBM Plex Sans", "Segoe UI", sans-serif;
@@ -159,4 +165,107 @@ body {
   .print-root, .print-root * { visibility: visible; }
   .print-root { position: absolute; inset: 0; width: 100%; padding: 24px; }
   .no-print { display: none !important; }
+}
+
+/* ============================================================
+   DARK MODE — Phase 4. Surfaces, lines & muted text invert via
+   variables; deep brand panels (pine-900/950) intentionally stay
+   deep. OS preference default, per-user toggle.
+   ============================================================ */
+.dark {
+  --color-paper: #0b1210;
+  --color-card: #121c18;
+  --color-ink: #e7f0ec;
+  --color-pine-100: #1c2a24;
+  --color-pine-200: #2b3d35;
+  --color-pine-400: #7e978c;
+  --color-pine-500: #94a99f;
+  --color-pine-600: #aabfb6;
+  --color-pine-700: #c2d2ca;
+  --color-pine-800: #d5e1db;
+  --color-pine-900: #e9f1ed;
+  --color-info-500: #4d9dc7;
+  --color-info-600: #6fb3d6;
+  --color-info-700: #8fc4de;
+  --color-pulse-50: #12241f;
+  --color-pulse-100: #173029;
+  --color-pulse-700: #57c3a4;
+  --color-pulse-800: #7dd4ba;
+  --color-vita-100: #2a2113;
+  --color-danger-100: #2a1515;
+  --color-info-100: #12222b;
+  color-scheme: dark;
+}
+/* white card surfaces → dark card (paper documents stay paper) */
+.dark .bg-white { background-color: #121c18 !important; }
+.print-root .bg-white, .dark .print-root .bg-white { background: #fff !important; }
+/* deep brand panels keep their depth in dark mode */
+.dark .bg-pine-900 { background-color: #0d2a24 !important; }
+.dark .hover\:bg-pine-900:hover { background-color: #0f3129 !important; }
+.dark .border-pine-900 { border-color: #31473e !important; }
+.dark .bg-pine-800 { background-color: #163a31 !important; }
+.dark .hover\:bg-pine-800:hover { background-color: #1b453a !important; }
+.dark .border-pine-800 { border-color: #163a31 !important; }
+.dark .text-pine-50 { color: #eef5f1 !important; }
+.dark .ring-pine-200 { --tw-ring-color: #2b3d35 !important; }
+.dark .divide-pine-100 > :not([hidden]) ~ :not([hidden]) { border-color: #1c2a24 !important; }
+.dark .border-pine-100 { border-color: #1c2a24 !important; }
+.dark input, .dark select, .dark textarea { color-scheme: dark; }
+.dark .shadow-lift { box-shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 28px -12px rgba(0, 0, 0, .6); }
+.dark .bg-clinical {
+  background-image:
+    radial-gradient(900px 420px at 85% -10%, rgba(23, 135, 107, 0.12), transparent 60%),
+    radial-gradient(700px 380px at -10% 110%, rgba(46, 125, 166, 0.08), transparent 60%),
+    linear-gradient(rgba(231, 240, 236, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(231, 240, 236, 0.03) 1px, transparent 1px);
+}
+
+/* ---------- skeleton loaders (Phase 4: skeletons, not spinners) ---------- */
+.skel {
+  position: relative;
+  overflow: hidden;
+  background: rgba(13, 42, 36, 0.07);
+  border-radius: 6px;
+}
+.dark .skel { background: rgba(231, 240, 236, 0.07); }
+.skel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  animation: shimmer 1.3s infinite;
+}
+.dark .skel::after { background: linear-gradient(90deg, transparent, rgba(231, 240, 236, 0.09), transparent); }
+
+/* ---------- keyboard hints ---------- */
+.kbd {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 20px; height: 20px; padding: 0 5px;
+  border: 1px solid var(--color-pine-200); border-bottom-width: 2px;
+  border-radius: 5px; background: var(--color-card);
+  font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+  color: var(--color-pine-500);
+}
+
+/* circuit texture for empty states / login (Phase 4 tech motif) */
+.circuit-bg {
+  background-image:
+    linear-gradient(rgba(23, 135, 107, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 135, 107, 0.06) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+.dark .circuit-bg {
+  background-image:
+    linear-gradient(rgba(63, 162, 132, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(63, 162, 132, 0.08) 1px, transparent 1px);
+}
+
+/* checkerboard behind the crop preview */
+.checker {
+  background-image: conic-gradient(#e3e9e6 25%, #fff 0 50%, #e3e9e6 0 75%, #fff 0);
+  background-size: 16px 16px;
+}
+.dark .checker {
+  background-image: conic-gradient(#1b2823 25%, #121c18 0 50%, #1b2823 0 75%, #121c18 0);
 }

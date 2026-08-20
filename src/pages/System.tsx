@@ -142,7 +142,19 @@ export function SystemPage() {
       )}
 
       {/* ================= LICENSE ================= */}
-      {tab === "license" && (
+      {tab === "license" && role !== "super" && (
+        <Card className="circuit-bg anim-fade-up p-10 text-center">
+          <span className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-pine-900 text-vita-400"><Icon name="lock" size={26} /></span>
+          <h2 className="mt-4 font-display text-xl font-extrabold text-pine-900">License & security controls are Root-only</h2>
+          <p className="mx-auto mt-2 max-w-lg text-[12.5px] leading-relaxed text-pine-500">
+            License management, key re-issue, anti-clone revocation and deployment switching sit outside the
+            Client Admin scope (Phase 6 hard allow-list). <b>Contact FS Softwares support to change these.</b>
+            Your active entitlement remains fully enforced.
+          </p>
+          <p className="mx-auto mt-4 inline-block rounded-md bg-pine-950 px-4 py-2 font-mono text-[12px] font-bold text-pulse-300">{license ?? "—"}</p>
+        </Card>
+      )}
+      {tab === "license" && role === "super" && (
         <div className="grid gap-4 lg:grid-cols-2">
           <Card>
             <SectionHead title="Active license" icon="key" />
@@ -232,7 +244,9 @@ export function SystemPage() {
                     <span className={active ? "text-pulse-600" : "text-pine-400"}><Icon name={m.icon} size={22} /></span>
                     <h3 className="mt-2 font-display text-[15px] font-extrabold text-pine-900">{m.name}</h3>
                     <p className="mt-1 text-[11.5px] leading-snug text-pine-500">{m.blurb}</p>
-                    {!active && <Btn size="sm" kind="outline" className="mt-3" onClick={() => toast(`Migration plan to ${m.name} queued — runbook generated`, "info")}><Icon name="chevR" size={12} /> Migrate</Btn>}
+                    {!active && (role === "super"
+                      ? <Btn size="sm" kind="outline" className="mt-3" onClick={() => toast(`Migration plan to ${m.name} queued — runbook generated`, "info")}><Icon name="chevR" size={12} /> Migrate</Btn>
+                      : <span className="mt-3 inline-flex items-center gap-1.5 rounded border border-dashed border-pine-300 px-2 py-1 font-mono text-[9px] font-bold uppercase tracking-wider text-pine-400"><Icon name="lock" size={11} /> change: Root-only</span>)}
                   </div>
                 </Reveal>
               );
