@@ -102,7 +102,7 @@ function CropModal({ src, onDone, onClose }: { src: string; onDone: (dataUrl: st
         </div>
         <div className="flex w-full items-center gap-3">
           <Btn kind="outline" size="sm" onClick={() => setRot(r => (r + 90) % 360)}><Icon name="refresh" size={13} /> Rotate 90°</Btn>
-          <input type="range" min={1} max={3} step={0.05} value={zoom} onChange={e => setZoom(+e.target.value)} className="flex-1 accent-[#2576eb]" />
+          <input type="range" min={1} max={3} step={0.05} value={zoom} onChange={e => setZoom(+e.target.value)} className="flex-1 accent-[#0f6f58]" />
           <span className="w-12 text-right font-mono text-[11px] font-semibold text-pine-500 tnum">{zoom.toFixed(2)}×</span>
         </div>
         <p className="text-[11px] text-pine-400">Drag to reposition · used for avatars & small display sizes</p>

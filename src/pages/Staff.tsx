@@ -5,7 +5,7 @@ import { useApp } from "../state";
 import { EntityAvatar, MediaUpload } from "../components/MediaUpload";
 import { Btn, Card, Chip, Icon, Modal, STATUS_TONE, SectionHead, Field, inputCls } from "../components/ui";
 
-const PALETTE = ["#2576eb", "#5c9cf5", "#e8a33d", "#12a5a0", "#d96889", "#1d2530"];
+const PALETTE = ["#17876b", "#2e7da6", "#c77f1b", "#7a4fbf", "#b9526e", "#0d2a24"];
 
 export function Staff() {
   const { db, setDb, toast } = useApp();

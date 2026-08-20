@@ -79,7 +79,7 @@ export function DataGrid<T>({
                 <div className="absolute right-0 top-full z-40 mt-1 w-48 rounded-md border border-pine-200 bg-card p-1.5 shadow-pop anim-pop">
                   {cols.map(c => (
                     <label key={c.key} className="flex cursor-pointer items-center gap-2 rounded px-2 py-1.5 text-[11.5px] font-semibold text-pine-700 transition-colors hover:bg-pulse-50">
-                      <input type="checkbox" checked={!hidden.has(c.key)} className="accent-[#2576eb]"
+                      <input type="checkbox" checked={!hidden.has(c.key)} className="accent-[#0f6f58]"
                         onChange={() => setHidden(h => { const n = new Set(h); if (n.has(c.key)) n.delete(c.key); else n.add(c.key); return n; })} />
                       {c.label}
                     </label>

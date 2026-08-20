@@ -63,7 +63,7 @@ export function Reports() {
         <Reveal delay={90}><Card>
           <SectionHead title="Revenue by payer mix" icon="invoice" />
           <Donut parts={[
-            { label: "HMO covered", value: Math.round(hmoPart), color: "#2576eb" },
+            { label: "HMO covered", value: Math.round(hmoPart), color: "#7a4fbf" },
             { label: "Client co-pay", value: Math.round(copay), color: "#e8a33d" },
             { label: "Self-pay", value: Math.max(60, Math.round(revenue - hmoPart - copay)), color: "#9aa4af" },
           ]} />

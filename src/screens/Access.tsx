@@ -56,7 +56,7 @@ export function Access({
           </div>
         </div>
         <div className="relative h-16">
-          <Ecg className="absolute inset-x-0 bottom-4 h-12 w-full" color="#2576eb" speed={2.6} />
+          <Ecg className="absolute inset-x-0 bottom-4 h-12 w-full" color="#3FA284" speed={2.6} />
           <div className="absolute bottom-3 right-6 font-mono text-[9px] uppercase tracking-[0.2em] text-pine-500">© FS Softwares × TophComm Systems</div>
         </div>
       </div>

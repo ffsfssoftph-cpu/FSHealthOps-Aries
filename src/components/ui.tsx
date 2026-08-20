@@ -148,7 +148,7 @@ export function Vitals({ label, value, prefix = "", suffix = "", spark, tone = "
   tone?: "green" | "amber" | "red" | "blue"; hint?: string; onClick?: () => void;
 }) {
   const v = useCountUp(value);
-  const colors = { green: "#2576eb", amber: "#e8a33d", red: "#e14d4d", blue: "#5c9cf5" };
+  const colors = { green: "#17876b", amber: "#e39a2e", red: "#d64545", blue: "#2e7da6" };
   return (
     <button onClick={onClick} className={`group relative h-full overflow-hidden rounded-lg border border-pine-200/80 bg-white p-4 text-left shadow-lift transition-all duration-300 hover:-translate-y-1 hover:shadow-pop ${onClick ? "cursor-pointer" : "cursor-default"}`}>
       <div className="flex items-center justify-between">
@@ -179,7 +179,7 @@ export function Spark({ data, color, w = 72, h = 26 }: { data: number[]; color: 
 }
 
 /* ---------------- charts ---------------- */
-export function Bars({ data, labels, color = "#2576eb", h = 120, fmt }: { data: number[]; labels: string[]; color?: string; h?: number; fmt?: (n: number) => string }) {
+export function Bars({ data, labels, color = "#17876b", h = 120, fmt }: { data: number[]; labels: string[]; color?: string; h?: number; fmt?: (n: number) => string }) {
   const max = Math.max(...data, 1);
   return (
     <div className="flex items-end gap-2" style={{ height: h }}>
@@ -225,7 +225,7 @@ export function Donut({ parts, size = 132 }: { parts: { label: string; value: nu
   );
 }
 
-export function TrendLine({ data, color = "#2576eb", h = 110, labels }: { data: number[]; color?: string; h?: number; labels?: string[] }) {
+export function TrendLine({ data, color = "#17876b", h = 110, labels }: { data: number[]; color?: string; h?: number; labels?: string[] }) {
   const w = 100;
   const max = Math.max(...data), min = Math.min(...data);
   const norm = (d: number) => 8 + (1 - (d - min) / (max - min || 1)) * (h - 24);
@@ -255,7 +255,7 @@ export function Modal({ open, onClose, title, children, wide, footer }: {
   }, [open, onClose]);
   if (!open) return null;
   return (
-    <div className="frost-backdrop fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-pine-950/40 p-4 pt-[7vh] anim-fade-in" onMouseDown={e => e.target === e.currentTarget && onClose()}>
+    <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-pine-950/40 p-4 pt-[12vh] anim-fade-in" onMouseDown={e => e.target === e.currentTarget && onClose()}>
       <div className={`w-full ${wide ? "max-w-3xl" : "max-w-lg"} anim-pop rounded-lg border border-pine-200/70 bg-white shadow-pop`}>
         <div className="flex items-center justify-between border-b border-pine-100 px-4 py-3">
           <h3 className="font-display text-[15px] font-extrabold tracking-tight text-pine-900">{title}</h3>

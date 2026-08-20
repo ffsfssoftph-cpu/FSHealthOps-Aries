@@ -233,7 +233,7 @@ export function SetupWizard({ onComplete }: { onComplete: (cfg: SetupConfig) => 
                 <div className="space-y-1.5">
                   {checklist.map(c => (
                     <div key={c.id} className="flex items-center gap-2 rounded-md border border-pine-100 bg-white px-3 py-1.5">
-                      <input type="checkbox" checked={c.required} onChange={() => setChecklist(checklist.map(x => x.id === c.id ? { ...x, required: !x.required } : x))} className="accent-[#2576eb]" />
+                      <input type="checkbox" checked={c.required} onChange={() => setChecklist(checklist.map(x => x.id === c.id ? { ...x, required: !x.required } : x))} className="accent-[#0f6f58]" />
                       <span className="flex-1 text-[12.5px] text-pine-800">{c.label}</span>
                       <span className={`font-mono text-[9px] font-bold uppercase ${c.required ? "text-danger-500" : "text-pine-400"}`}>{c.required ? "required" : "optional"}</span>
                       <button onClick={() => setChecklist(checklist.filter(x => x.id !== c.id))} className="text-pine-300 hover:text-danger-500"><Icon name="x" size={13} /></button>

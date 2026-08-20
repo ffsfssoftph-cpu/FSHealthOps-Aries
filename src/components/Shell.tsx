@@ -132,7 +132,7 @@ export function Shell() {
   return (
     <div className="bg-clinical noise-layer min-h-screen">
       {/* floating top bar */}
-      <header className="frost-backdrop sticky top-0 z-40 border-b border-pine-200/70 bg-paper/75">
+      <header className="sticky top-0 z-40 border-b border-pine-200/70 bg-paper/80">
         <div className="flex h-[54px] items-center gap-3 px-4">
           <button onClick={() => setCollapsed(c => !c)} title={collapsed ? "Expand navigation" : "Collapse navigation"}
             className="grid h-8 w-8 place-items-center rounded-md text-pine-500 transition-all hover:bg-white hover:text-pulse-600 hover:shadow-lift active:scale-90">
