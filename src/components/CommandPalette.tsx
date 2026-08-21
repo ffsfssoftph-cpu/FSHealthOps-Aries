@@ -34,6 +34,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
       { id: "new-client", label: "Open Clients — start new intake", hint: "Quick action", icon: "heart", run: () => app.setNav("clients") },
       { id: "invoice", label: "Open Billing — draft an invoice", hint: "Quick action", icon: "invoice", run: () => app.setNav("billing") },
       { id: "backup", label: "Create manual backup", hint: "Backup · Phase 6", icon: "shield", run: () => app.toast("Backup job dispatched to the data directory", "ok") },
+      { id: "packaging", label: "Distribution console — package Windows installer", hint: "System → Packaging tab", icon: "download", run: () => { app.setNav("system"); app.toast("Opening System & License — select the Packaging & Installer tab", "info"); } },
     ];
     if (app.hrEnabled) actions.push({ id: "clock", label: "HR — open time & leave register", hint: "HR add-on", icon: "clock", run: () => app.setNav("hr") });
     if (app.sessionUser?.isRoot) actions.push({ id: "hr-toggle", label: `${app.hrEnabled ? "Deactivate" : "Activate"} HR add-on (license)`, hint: "Root · Phase 11", icon: "key", run: () => app.toggleHR() });

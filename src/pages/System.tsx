@@ -3,6 +3,7 @@ import { CHANGELOG, DEPLOY_MODES, E2E_TESTS, LOGO_SURFACES, TEN_REQUIREMENTS, ge
 import { useApp } from "../state";
 import { CoBrandLine, Emblem, Lockup, LogoStandardGrid } from "../components/Logo";
 import { Btn, Card, Chip, Icon, KV, Modal, Progress, Reveal, SectionHead, Tabs, Toggle, Field, inputCls } from "../components/ui";
+import { Packaging } from "./Packaging";
 
 const ARTIFACTS = [
   { name: "FSCareOps-Setup-1.0.0.exe", size: "96.4 MB", desc: "Windows installer — composition follows the selected Pattern", sha: "3f9a…c41e" },
@@ -67,6 +68,7 @@ export function SystemPage() {
 
   const tabs = [
     { key: "updates", label: "Updates & Builds", icon: "download" },
+    { key: "packaging", label: "Packaging & Installer", icon: "monitor" },
     { key: "license", label: "License & Security", icon: "key" },
     { key: "deploy", label: "Deployment", icon: "server" },
     { key: "e2e", label: "E2E QA", icon: "check" },
@@ -112,7 +114,12 @@ export function SystemPage() {
               <Card pad={false} className="h-full">
                 <div className="flex items-center justify-between border-b border-pine-200 bg-paper/80 px-4 py-2.5">
                   <h3 className="font-display text-[14px] font-extrabold text-pine-900">Packaged deliverables</h3>
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-pine-400">SHA-256 verified</span>
+                  <span className="flex items-center gap-2">
+                    <button onClick={() => setTab("packaging")} className="rounded-md bg-pine-950 px-2.5 py-1 font-mono text-[9.5px] font-bold uppercase tracking-wider text-pulse-300 transition-all hover:bg-pine-800 active:scale-95">
+                      Build installer ▸
+                    </button>
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-pine-400">SHA-256 verified</span>
+                  </span>
                 </div>
                 <div className="divide-y divide-pine-100">
                   {ARTIFACTS.map(a => (
@@ -140,6 +147,9 @@ export function SystemPage() {
           </div>
         </div>
       )}
+
+      {/* ================= PACKAGING & INSTALLER ================= */}
+      {tab === "packaging" && <Packaging />}
 
       {/* ================= LICENSE ================= */}
       {tab === "license" && role !== "super" && (
